@@ -1,0 +1,38 @@
+{
+  "name": "metamask-sign-provider",
+  "version": "0.1.0",
+  "description": "An SDK RPC provider that can use Metamask to sign a conflux transaction",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "node build-frontend.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/conflux-fans/metamask-sign-provider.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/conflux-fans/metamask-sign-provider/issues"
+  },
+  "homepage": "https://github.com/conflux-fans/metamask-sign-provider#readme",
+  "dependencies": {
+    "axios": "^0.21.1",
+    "js-conflux-sdk": "^1.5.11"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.13.10",
+    "@babel/plugin-transform-runtime": "^7.13.10",
+    "@babel/preset-env": "^7.13.10",
+    "babel-plugin-lodash": "^3.3.4",
+    "babelify": "^10.0.0",
+    "browserify": "^17.0.0",
+    "exorcist": "^2.0.0",
+    "fs-extra": "^9.1.0",
+    "jsbi": "^3.1.4",
+    "minify-stream": "^2.1.0",
+    "mold-source-map": "^0.4.0"
+  }
+}

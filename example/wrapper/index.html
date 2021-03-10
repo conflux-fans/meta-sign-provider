@@ -1,0 +1,72 @@
+<html>
+  <head>
+    <title>Test sign</title>
+  </head>
+  <body>
+    <button class="enableEthereumButton">Enable Ethereum</button>
+    <h2>Account: <span class="showAccount"></span></h2>
+    <script>
+      const ethereumButton = document.querySelector('.enableEthereumButton');
+      const showAccount = document.querySelector('.showAccount');
+
+      ethereumButton.addEventListener('click', () => {
+        getAccount();
+      });
+
+      async function getAccount() {
+        const accounts = await ethereum.request({ method: 'eth_requestAccounts' });
+        const account = accounts[0];
+        showAccount.innerHTML = account;
+      }
+    </script>
+
+    <button class="sendTxBtn">SendTx</button>
+    <script src='/dist/wrapEthereumRequest.min.js'></script>
+    <script>
+      wrapEthereumRequest();
+      const sendTxButton = document.querySelector('.sendTxBtn');
+      sendTxButton.addEventListener('click', () => {
+        ethereum.request({
+          method: 'eth_sendTransaction', 
+          params: [{
+            from: ethereum.selectedAddress,
+            to: '0x0000000000000000000000000000000000000000',
+            value: '0x01',
+            gas: '0x100',
+            storageLimit: '0x100'
+          }]
+        });
+      });
+    </script>
+
+    <br/><br/>
+    <button class="sendTxBtn2">SendTx with js-conflux-sdk</button>
+    <script src='/node_modules/js-conflux-sdk/dist/js-conflux-sdk.umd.min.js'></script>
+    <script src='/dist/MetaSignProvider.min.js'></script>
+    <script>
+      function convertEthAddressToCfx(address) {
+        address = address.toLowerCase();
+        return `0x1${address.slice(3)}`;
+      }
+      let url = 'https://test.confluxrpc.org/v2';
+      let cfx = new Conflux.Conflux({
+        url,
+        networkId: 1,
+      });
+      let provider = new MetaSignProvider({
+        url,
+        // logger: console
+      });
+      cfx.provider = provider;
+      const sendTxButton2 = document.querySelector('.sendTxBtn2');
+      sendTxButton2.addEventListener('click', async () => {
+        // let nonce = await cfx.getStatus();
+        await cfx.sendTransaction({
+          from: convertEthAddressToCfx(ethereum.selectedAddress),
+          to: '0x0000000000000000000000000000000000000000',
+          value: '0x01',
+        });
+      });
+    </script>
+  </body>
+</html>
