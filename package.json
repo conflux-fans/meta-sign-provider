@@ -1,5 +1,5 @@
 {
-  "name": "metamask-sign-provider",
+  "name": "meta-sign-provider",
   "version": "0.1.0",
   "description": "An SDK RPC provider that can use Metamask to sign a conflux transaction",
   "main": "index.js",
